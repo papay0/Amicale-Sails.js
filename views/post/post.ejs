@@ -1,0 +1,39 @@
+  <div class="container">
+  <h2>Post | Notification</h2>
+  
+  <% _.each(posts, function (post) { %>
+  <div class="panel-group">
+
+  <% if (post.get('isSentPushNotification')) { %> 
+    <div class="panel panel-success">
+    <div class="panel-heading"><%= post.get('Title') %></div>
+      <div class="panel-body"><%= post.get('Description') -%></div>
+
+    <% } else { %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= post.get('Title') %>
+   	<form action = "/post/sendPush" method = "post">
+   		<input type="hidden" name="objectId" value="<%= post.id %>">
+   		<input type="hidden" name="title" value="<%= post.get('Title') %>">
+        <input type="submit" value="Send" class="btn btn-warning btn-xs" style="float: right; clear:both;"/>
+    </form>
+      </div>
+      <div class="panel-body"><p><%= post.get('Description') %></p></div>
+    </div>
+
+    <% } %>
+    </div>
+    <p align="center">
+    <% if (post.get('useDefaultPicture') == false) { %>
+    	<img src="<%= post.get('file').url() %>" height="352" width="470" >
+    <% } else { %>
+    	<img src="http://files.parsetfss.com/ba5bc6c0-54ec-464d-98f4-189179ea23d6/tfss-6793b2e4-a688-4316-a2b8-55a9e3c0c294-Amicalifornie.jpg" height="352" width="470"  >
+    <% } %>
+    </p>
+    <br>
+    <% var description = post.get('Description') %>
+    <%- description %>
+  <% }) %>
+</div>
+
