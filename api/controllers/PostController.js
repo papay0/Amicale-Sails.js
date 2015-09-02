@@ -127,6 +127,7 @@
 						} else {
 							res.redirect('/post');
 						}
+
 						
 				},
 
